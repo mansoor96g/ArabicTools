@@ -4,11 +4,12 @@
 '''Author : Zied Elloumi
         python script to convert Arabic chr to Backwalter',
         and Backwalter to Arabic chr',
-        I used standart transliteration from : 
+        I used standard transliteration from : 
         http://www.qamus.org/transliteration.htm '''
 
 import sys 
 
+# dictionary bw2ar used to convert from arabic to buckwalter
 ar2bw={'\'': u'\u0621','|'  :  u'\u0622','>' :  u'\u0623','&' :  u'\u0624',
        '<' :  u'\u0625','}' :  u'\u0626','A' :  u'\u0627','b' :  u'\u0628',
        'p' :  u'\u0629','t' :  u'\u062A','v' :  u'\u062B','j' :  u'\u062C',
@@ -23,6 +24,7 @@ ar2bw={'\'': u'\u0621','|'  :  u'\u0622','>' :  u'\u0623','&' :  u'\u0624',
        'o' :  u'\u0652','`' :  u'\u0670','{' :  u'\u0671','P' :  u'\u067E',
        'J' :  u'\u0686','V' :  u'\u06A4','G' :  u'\u06AF',' ' :  ' '}
 
+# dictionary bw2ar used to convert from buckwalter to arabic
 bw2ar={'\'':  u'\u0621','|' :  u'\u0622','>' :  u'\u0623','&' :  u'\u0624', 
        '<' :  u'\u0625','}' :  u'\u0626','A' :  u'\u0627','b' :  u'\u0628', 
        'p' :  u'\u0629','t' :  u'\u062A','v' :  u'\u062B','j' :  u'\u062C', 
@@ -38,6 +40,10 @@ bw2ar={'\'':  u'\u0621','|' :  u'\u0622','>' :  u'\u0623','&' :  u'\u0624',
        'J' :  u'\u0686','V' :  u'\u06A4','G' :  u'\u06AF',' ' : ' '}
 
 def convert (string,dict):
+        """ convert funtion from ar2bw or bw2ar depend on the dict you pass
+        takes string and dict as arug
+        return string 
+        """
    chrlist=list(string.strip()) 
    for i in range (0,len(chrlist)):
        if chrlist[i] in dict.keys():
@@ -45,7 +51,7 @@ def convert (string,dict):
    return "".join(chrlist)
 
 def usage ():
-    print ("Usage: \n\tpython3 Buckwalter.py -c ar2bw < input_ar_file > output_bw_file                 \n\techo \"String\" | python3 -c ar2bw ")
+    print ("Usage: \n\tpython3 Buckwalter.py -c ar2bw < input_ar_file > output_bw_file \t\t \n\techo \"String\" | python3 -c ar2bw ")
 for line in sys.stdin:
     if (sys.argv[1] in ["ar2bw","bw2ar"]):
         print (convert(line,ar2bw))
